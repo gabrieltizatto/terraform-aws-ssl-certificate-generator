@@ -58,10 +58,6 @@ resource "acme_certificate" "certificates" {
     }
 }
 
-    var.give_neo_cloudwatch_full_access
-    ? aws_iam_user_policy_attachment.full_access[0].policy_arn
-    : aws_iam_user_policy_attachment.read_only[0].policy_arn
-
 resource "aws_acm_certificate" "cert" {
   private_key        =  acme_certificate.certificates[0].private_key_pem   ###tls_private_key.example.private_key_pem
   certificate_body   =  acme_certificate.certificates[0].certificate_pem ####tls_self_signed_cert.example.cert_pem
