@@ -82,7 +82,7 @@ module "acme" {
 | whitelisted\_names | If you have specified whitelist to forward, the whitelisted cookies that you want CloudFront to forward to your origin. | `any` | `null` | no |
 | create\_iam\_user | If you want the module to create the IAM user that will be used for validating the certificate for you. | `bool` | `false` | no |
 | s3\_cert\_folder\_name | S3 folder name to store the certs. | `string` | n/a | yes |
-| s3\_cert\_bucket\_name | S3 bucket name that will be created to store the certs. | `string` | `n/a | yes |
+| s3\_cert\_bucket\_name | S3 bucket name that will be created to store the certs. | `string` | n/a | yes |
 
 ## Outputs
 
