@@ -6,7 +6,7 @@
 
 
 module "acme" {
-  source = "/Users/gabrieltizatto/Projects/personal/terraform/terraform-aws-ssl-certificate-generator"
+  source = "gabrieltizatto/terraform-aws-ssl-certificate-generator/aws"
 
   email_address          = "example@email.com"
   aws_hosted_zone_id     = "<hosted_zone_id>"
