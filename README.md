@@ -6,18 +6,21 @@
 
 
 module "acme" {
-  source = "../../modules/new_letsencrypt"
+  source = "/Users/gabrieltizatto/Projects/personal/terraform/terraform-aws-ssl-certificate-generator"
 
-  email_address          = "test@email.com"
-  aws_hosted_zone_id     = "Z02107233MB0ZAV0V4BE4"
+  email_address          = "example@email.com"
+  aws_hosted_zone_id     = "<hosted_zone_id>"
   region                 = "us-east-1"
   dns_challenge_provider = "route53"
 
   create_iam_user = true
+  
+  s3_cert_bucket_name = "<s3_bucket_name>"
+  s3_cert_folder_name  = "<s3_bucket_foldername>"
 
   certificates = [{
       common_name = "domain.com",
-      subject_alternative_names = ["www.domain.com"],
+      subject_alternative_names = ["sub.domain.com"],
       key_type = null,
       certificate_request_pem = null,
       must_staple = false,
@@ -25,16 +28,8 @@ module "acme" {
       min_days_remaining = 40
     },
   ]
-
-  # AWS Region
-  providers = {
-    aws = "aws.ue1"
-  }
 }
 
-# output "certificates" {
-#   value = module.acme.certificates
-# }
 
 
 ```
@@ -86,6 +81,8 @@ module "acme" {
 | web\_acl\_id | If you're using AWS WAF to filter CloudFront requests, the Id of the AWS WAF web ACL that is associated with the distribution. | `any` | `null` | no |
 | whitelisted\_names | If you have specified whitelist to forward, the whitelisted cookies that you want CloudFront to forward to your origin. | `any` | `null` | no |
 | create\_iam\_user | If you want the module to create the IAM user that will be used for validating the certificate for you. | `bool` | `false` | no |
+| s3\_cert\_folder\_name | S3 folder name to store the certs. | `string` | n/a | yes |
+| s3\_cert\_bucket\_name | S3 bucket name that will be created to store the certs. | `string` | `n/a | yes |
 
 ## Outputs
 

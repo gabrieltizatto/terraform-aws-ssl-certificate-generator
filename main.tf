@@ -50,8 +50,8 @@ resource "acme_certificate" "certificates" {
   dns_challenge {
       provider = var.dns_challenge_provider
       config   = {
-        AWS_ACCESS_KEY_ID     = var.create_iam_user ? aws_iam_access_key.letsencrypt_access_key.*.id : var.iam_access_key 
-        AWS_SECRET_ACCESS_KEY = var.create_iam_user? aws_iam_access_key.letsencrypt_access_key.*.secret : var.iam_secret_access_key
+        AWS_ACCESS_KEY_ID     = var.create_iam_user ? aws_iam_access_key.letsencrypt_access_key[0].id : var.iam_access_key 
+        AWS_SECRET_ACCESS_KEY = var.create_iam_user? aws_iam_access_key.letsencrypt_access_key[0].secret : var.iam_secret_access_key
         AWS_DEFAULT_REGION    = var.region
         AWS_HOSTED_ZONE_ID    = var.aws_hosted_zone_id
       }
@@ -63,4 +63,6 @@ resource "aws_acm_certificate" "cert" {
   certificate_body   =  acme_certificate.certificates[0].certificate_pem ####tls_self_signed_cert.example.cert_pem
   certificate_chain  =  acme_certificate.certificates[0].issuer_pem
   depends_on         =  [acme_certificate.certificates,tls_private_key.registration,acme_registration.registration]
+
+  tags = var.tags
 }

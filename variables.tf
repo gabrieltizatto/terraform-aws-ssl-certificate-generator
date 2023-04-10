@@ -61,7 +61,7 @@ variable "aws_hosted_zone_id" {
   default     = null
 }
 
-variable "s3_cert_foldername" {
+variable "s3_cert_folder_name" {
   type = string
 }
 
@@ -91,9 +91,17 @@ variable "create_iam_user" {
 }
 
 variable "iam_access_key" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "iam_secret_access_key" {
-  type = string
+  type    = string
+  default = null
+}
+
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "Resource tags"
 }
